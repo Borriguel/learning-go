@@ -1,8 +1,8 @@
 package iteration
 
-func Repeat(caracter string) string {
+func Repeat(caracter string, count int) string {
 	repetitions := ""
-	for range 5 {
+	for range count {
 		repetitions += caracter
 	}
 	return repetitions
