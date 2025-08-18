@@ -20,6 +20,10 @@ func (w *Wallet) Balance() Rodocoin {
 	return w.balance
 }
 
+func (w *Wallet) Withdraw(amount Rodocoin) {
+	w.balance -= amount
+}
+
 func (r Rodocoin) String() string {
 	return fmt.Sprintf("%d RDC", r)
 }
