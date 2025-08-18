@@ -28,4 +28,9 @@ func TestArea(t *testing.T) {
 		circle := Circle{6.0}
 		verifyArea(t, circle, 108.00)
 	})
+
+	t.Run("triangle", func(t *testing.T) {
+		triangle := Triangle{12.0, 6.0}
+		verifyArea(t, triangle, 36.0)
+	})
 }
