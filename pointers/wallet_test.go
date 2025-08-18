@@ -12,6 +12,12 @@ func TestWallet(t *testing.T) {
 			t.Errorf("result '%s', expected '%s'", result, expected)
 		}
 	}
+	confirmError := func(t *testing.T, err error) {
+		t.Helper()
+		if err == nil {
+			t.Error("Expected an error but none occurred")
+		}
+	}
 	t.Run("deposit", func(t *testing.T) {
 		wallet := Wallet{}
 		wallet.Deposit(26)
@@ -21,5 +27,11 @@ func TestWallet(t *testing.T) {
 		wallet := Wallet{balance: Rodocoin(26)}
 		wallet.Withdraw(23)
 		confirmBalance(t, wallet, 3)
+	})
+	t.Run("withdraw with insufficient balance", func(t *testing.T) {
+		wallet := Wallet{balance: Rodocoin(17)}
+		err := wallet.Withdraw(25)
+		confirmBalance(t, wallet, 17)
+		confirmError(t, err)
 	})
 }
