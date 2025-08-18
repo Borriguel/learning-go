@@ -5,6 +5,8 @@ import (
 	"fmt"
 )
 
+var ErrorInsufficientBalance = errors.New("insufficient balance")
+
 type Rodocoin int
 
 type Stringer interface {
@@ -25,7 +27,7 @@ func (w *Wallet) Balance() Rodocoin {
 
 func (w *Wallet) Withdraw(amount Rodocoin) error {
 	if amount > w.balance {
-		return errors.New("Insufficient balance")
+		return ErrorInsufficientBalance
 	}
 	w.balance -= amount
 	return nil
