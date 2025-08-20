@@ -1,6 +1,8 @@
 package maps
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestSearch(t *testing.T) {
 	dictionary := Dictionary{"test": "this is just a test"}
@@ -14,7 +16,14 @@ func TestSearch(t *testing.T) {
 		compareError(t, result, ErrNotFind)
 	})
 }
-
+func TestAdd(t *testing.T) {
+	dictionary := Dictionary{}
+	dictionary.Add("test", "this is just a test")
+	expected := "this is just a test"
+	result, err := dictionary.Search("test")
+	compareError(t, err, nil)
+	compareStrings(t, expected, result)
+}
 func compareStrings(t *testing.T, result, expected string) {
 	t.Helper()
 	if result != expected {
