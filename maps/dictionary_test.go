@@ -17,12 +17,30 @@ func TestSearch(t *testing.T) {
 	})
 }
 func TestAdd(t *testing.T) {
-	dictionary := Dictionary{}
-	dictionary.Add("test", "this is just a test")
-	expected := "this is just a test"
-	result, err := dictionary.Search("test")
-	compareError(t, err, nil)
-	compareStrings(t, expected, result)
+	word := "test"
+	definition := "this is just a test"
+	t.Run("new word", func(t *testing.T) {
+		dictionary := Dictionary{}
+		err := dictionary.Add(word, definition)
+		compareError(t, err, nil)
+		compareDefinition(t, dictionary, word, definition)
+	})
+	t.Run("existing word", func(t *testing.T) {
+		dictionary := Dictionary{word: definition}
+		err := dictionary.Add(word, "new test")
+		compareError(t, err, ErrExistingWord)
+		compareDefinition(t, dictionary, word, definition)
+	})
+}
+func compareDefinition(t *testing.T, dictionary Dictionary, word, definition string) {
+	t.Helper()
+	result, err := dictionary.Search(word)
+	if err != nil {
+		t.Fatal("should have found added word")
+	}
+	if definition != result {
+		t.Errorf("result '%s', expected '%s'", result, definition)
+	}
 }
 func compareStrings(t *testing.T, result, expected string) {
 	t.Helper()
