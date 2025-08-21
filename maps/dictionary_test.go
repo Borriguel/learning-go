@@ -32,6 +32,22 @@ func TestAdd(t *testing.T) {
 		compareDefinition(t, dictionary, word, definition)
 	})
 }
+func TestUpdate(t *testing.T) {
+	word := "test"
+	definition := "this is just a test"
+	t.Run("existing word", func(t *testing.T) {
+		dictionary := Dictionary{word: definition}
+		newDefinition := "new definition"
+		err := dictionary.Update(word, newDefinition)
+		compareError(t, err, nil)
+		compareDefinition(t, dictionary, word, newDefinition)
+	})
+	t.Run("new word", func(t *testing.T) {
+		dictionary := Dictionary{}
+		err := dictionary.Update(word, definition)
+		compareError(t, err, ErrNonExistingWord)
+	})
+}
 func compareDefinition(t *testing.T, dictionary Dictionary, word, definition string) {
 	t.Helper()
 	result, err := dictionary.Search(word)
