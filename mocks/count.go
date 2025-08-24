@@ -1,16 +1,18 @@
 package mocks
 
 import (
-	"bytes"
 	"fmt"
+	"io"
 	"time"
 )
 
-type SleeperStandard struct {
+type SleeperConfigurable struct {
+	duration time.Duration
+	pause    func(time.Duration)
 }
 
-func (d *SleeperStandard) Sleep() {
-	time.Sleep(1 * time.Second)
+func (s *SleeperConfigurable) Sleep() {
+	s.pause(s.duration)
 }
 
 type Sleeper interface {
@@ -20,7 +22,7 @@ type Sleeper interface {
 const lastWord = "Go!"
 const startCount = 3
 
-func Count(exit *bytes.Buffer, sleeper Sleeper) {
+func Count(exit io.Writer, sleeper Sleeper) {
 	for i := startCount; i > 0; i-- {
 		sleeper.Sleep()
 		fmt.Fprintln(exit, i)
