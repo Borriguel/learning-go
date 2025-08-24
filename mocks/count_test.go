@@ -33,8 +33,8 @@ Go!`
 func TestSleeperConfigurable(t *testing.T) {
 	timePause := 5 * time.Second
 	timeSpy := &TimeSpy{}
-	sleeper := SleepConfigurable{timePause, timeSpy.Sleep}
-	sleeper.Pause()
+	sleeper := SleeperConfigurable{timePause, timeSpy.Sleep}
+	sleeper.Sleep()
 	if timeSpy.pauseDuration != timePause {
 		t.Errorf("should have paused for %v, but paused for %v", timePause, timeSpy.pauseDuration)
 	}
@@ -43,10 +43,7 @@ func TestSleeperConfigurable(t *testing.T) {
 type SleeperSpy struct {
 	Calls int
 }
-type SleepConfigurable struct {
-	duration time.Duration
-	pause    func(time.Duration)
-}
+
 type SpyCountOperations struct {
 	Calls []string
 }
@@ -67,7 +64,7 @@ func (s *SpyCountOperations) Write(p []byte) (n int, err error) {
 	return
 }
 
-func (s *SleepConfigurable) Pause() {
+func (s *SleeperConfigurable) Sleep() {
 	s.pause(s.duration)
 }
 
