@@ -2,7 +2,6 @@ package _select
 
 import (
 	"net/http"
-	"time"
 )
 
 func Racer(x, y string) (winner string) {
@@ -21,10 +20,4 @@ func ping(url string) chan bool {
 		ch <- true
 	}()
 	return ch
-}
-
-func measureResponseTime(url string) time.Duration {
-	start := time.Now()
-	http.Get(url)
-	return time.Since(start)
 }
