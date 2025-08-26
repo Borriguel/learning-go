@@ -4,19 +4,19 @@ import "testing"
 
 func TestPerimeter(t *testing.T) {
 	rectangle := Rectangle{6.0, 5.0}
-	result := Perimeter(rectangle)
-	expected := 22.0
-	if result != expected {
-		t.Errorf("result '%.2f' expected '%.2f", result, expected)
+	got := Perimeter(rectangle)
+	want := 22.0
+	if got != want {
+		t.Errorf("got '%.2f' want '%.2f", got, want)
 	}
 }
 
 func TestArea(t *testing.T) {
-	verifyArea := func(t *testing.T, shape Shape, expected float64) {
+	verifyArea := func(t *testing.T, shape Shape, want float64) {
 		t.Helper()
-		result := shape.Area()
-		if result != expected {
-			t.Errorf("result '%.2f' expected '%.2f", result, expected)
+		got := shape.Area()
+		if got != want {
+			t.Errorf("got '%.2f' want '%.2f", got, want)
 		}
 	}
 	t.Run("rectangle", func(t *testing.T) {

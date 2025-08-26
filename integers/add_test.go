@@ -4,8 +4,8 @@ import "testing"
 
 func TestAdd(t *testing.T) {
 	sum := Add(7, 2)
-	expected := 9
-	if sum != expected {
-		t.Errorf("expected '%d', result '%d'", expected, sum)
+	want := 9
+	if sum != want {
+		t.Errorf("want '%d', got '%d'", want, sum)
 	}
 }

@@ -18,13 +18,13 @@ func TestWebsiteCheck(t *testing.T) {
 		"http://flogao.com",
 		"http://myspace.com",
 	}
-	expected := map[string]bool{
+	want := map[string]bool{
 		"http://orkut.com":   false,
 		"http://flogao.com":  true,
 		"http://myspace.com": false,
 	}
-	result := WebsiteCheck(mockWebsiteChecker, websites)
-	if !reflect.DeepEqual(expected, result) {
-		t.Fatalf("expected: '%v', result: '%v'", expected, result)
+	got := WebsiteCheck(mockWebsiteChecker, websites)
+	if !reflect.DeepEqual(want, got) {
+		t.Fatalf("want: '%v', got: '%v'", want, got)
 	}
 }

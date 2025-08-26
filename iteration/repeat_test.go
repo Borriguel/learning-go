@@ -4,9 +4,9 @@ import "testing"
 
 func TestRepeat(t *testing.T) {
 	repetitions := Repeat("a", 6)
-	expected := "aaaaaa"
-	if repetitions != expected {
-		t.Errorf("Expected '%s', result '%s'", expected, repetitions)
+	want := "aaaaaa"
+	if repetitions != want {
+		t.Errorf("want '%s', got '%s'", want, repetitions)
 	}
 }
 

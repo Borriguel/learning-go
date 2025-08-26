@@ -7,13 +7,13 @@ import (
 func TestSearch(t *testing.T) {
 	dictionary := Dictionary{"test": "this is just a test"}
 	t.Run("known word", func(t *testing.T) {
-		result, _ := dictionary.Search("test")
-		expected := "this is just a test"
-		compareStrings(t, result, expected)
+		got, _ := dictionary.Search("test")
+		want := "this is just a test"
+		compareStrings(t, got, want)
 	})
 	t.Run("unknown word", func(t *testing.T) {
-		_, result := dictionary.Search("unknown")
-		compareError(t, result, ErrNotFind)
+		_, got := dictionary.Search("unknown")
+		compareError(t, got, ErrNotFind)
 	})
 }
 func TestAdd(t *testing.T) {
@@ -65,19 +65,19 @@ func compareDefinition(t *testing.T, dictionary Dictionary, word, definition str
 		t.Fatal("should have found added word")
 	}
 	if definition != result {
-		t.Errorf("result '%s', expected '%s'", result, definition)
+		t.Errorf("got '%s', want '%s'", result, definition)
 	}
 }
 func compareStrings(t *testing.T, result, expected string) {
 	t.Helper()
 	if result != expected {
-		t.Errorf("result '%s', expected '%s', given '%s'", result, expected, "test")
+		t.Errorf("got '%s', want '%s', given '%s'", result, expected, "test")
 	}
 }
 
 func compareError(t *testing.T, result, expected error) {
 	t.Helper()
 	if result != expected {
-		t.Errorf("result '%s', expected '%s'", result, expected)
+		t.Errorf("got '%s', want '%s'", result, expected)
 	}
 }

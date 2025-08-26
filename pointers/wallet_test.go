@@ -5,25 +5,25 @@ import (
 )
 
 func TestWallet(t *testing.T) {
-	confirmBalance := func(t *testing.T, wallet Wallet, expected Rodocoin) {
+	confirmBalance := func(t *testing.T, wallet Wallet, want Rodocoin) {
 		t.Helper()
-		result := wallet.Balance()
-		if result != expected {
-			t.Errorf("result '%s', expected '%s'", result, expected)
+		got := wallet.Balance()
+		if got != want {
+			t.Errorf("got '%s', want '%s'", got, want)
 		}
 	}
-	confirmError := func(t *testing.T, result error, expected error) {
+	confirmError := func(t *testing.T, got error, want error) {
 		t.Helper()
-		if result == nil {
-			t.Fatal("expected an error but none occurred")
+		if got == nil {
+			t.Fatal("want an error but none occurred")
 		}
-		if result != expected {
-			t.Errorf("result '%s' expected '%s'", result, expected)
+		if got != want {
+			t.Errorf("got '%s' want '%s'", got, want)
 		}
 	}
-	confirmNotError := func(t *testing.T, result error) {
+	confirmNotError := func(t *testing.T, got error) {
 		t.Helper()
-		if result != nil {
+		if got != nil {
 			t.Fatal("unexpected error received")
 		}
 	}

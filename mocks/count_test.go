@@ -11,21 +11,21 @@ func TestCount(t *testing.T) {
 	t.Run("prints 3 until Go!", func(t *testing.T) {
 		buffer := &bytes.Buffer{}
 		Count(buffer, &SpyCountOperations{})
-		result := buffer.String()
-		expected := `3
+		got := buffer.String()
+		want := `3
 2
 1
 Go!`
-		if result != expected {
-			t.Errorf("result '%s' expected '%s'", result, expected)
+		if got != want {
+			t.Errorf("got '%s' want '%s'", got, want)
 		}
 	})
 	t.Run("pause before each print", func(t *testing.T) {
 		spyPrintSleep := &SpyCountOperations{}
 		Count(spyPrintSleep, spyPrintSleep)
-		expected := []string{pause, write, pause, write, pause, write, pause, write}
-		if !reflect.DeepEqual(expected, spyPrintSleep.Calls) {
-			t.Errorf("expected '%v', result '%v'", expected, spyPrintSleep.Calls)
+		want := []string{pause, write, pause, write, pause, write, pause, write}
+		if !reflect.DeepEqual(want, spyPrintSleep.Calls) {
+			t.Errorf("want '%v', got '%v'", want, spyPrintSleep.Calls)
 		}
 	})
 }
