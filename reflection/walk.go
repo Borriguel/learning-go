@@ -4,10 +4,16 @@ import "reflect"
 
 func walk(x interface{}, fn func(entry string)) {
 	value := reflect.ValueOf(x)
+	if value.Kind() == reflect.Ptr {
+		value = value.Elem()
+	}
 	for i := 0; i < value.NumField(); i++ {
 		field := value.Field(i)
-		if field.Kind() == reflect.String {
+		switch field.Kind() {
+		case reflect.String:
 			fn(field.String())
+		case reflect.Struct:
+			walk(field.Interface(), fn)
 		}
 	}
 }
