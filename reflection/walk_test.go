@@ -56,12 +56,20 @@ func TestWalk(t *testing.T) {
 				{29, "RJ"},
 				{41, "Lisboa"},
 			}, []string{"RJ", "Lisboa"},
-		}, {"Arrays",
+		}, {
+			"Arrays",
 			[2]Profile{
 				{25, "Bangladesh"},
 				{29, "Pequim"},
 			},
 			[]string{"Bangladesh", "Pequim"},
+		}, {
+			"Maps",
+			map[string]string{
+				"Foo": "Bar",
+				"Baz": "Boz",
+			},
+			[]string{"Bar", "Boz"},
 		},
 	}
 	for _, test := range cases {
